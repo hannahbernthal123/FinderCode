@@ -1,9 +1,10 @@
 Name: YOUR NAME HERE
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date   |    Time    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Update |
+|:-------|:----------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Oct 30 | 2pm-2:30pm |                                                                                                                                     Logan and I started thinking about different ways to solve this problem. I definitely think it has something to do with hashes. The current idea that I have is to create a TST that gets filled in with the different hashes. Then, at the end of each insertion, the node will be labeled with a string with the name of the product or whatever your value is. |
+| Oct 30 | 2:30pm-3pm | So I started by pulling int he TST and TSTNode class from our SpellCheck code. Once I did that, I did a bit of editing to it to make sure that it works for this new problem set. For example, I changed insert so that it takes in a value as well as the hash of the key, that way each hash could be labeled with the product name. I also used my has function from DNA but edited it to work with a RADIX of 256 instead of 4. After this, all that was left to implement is the query function. |
+| Nov 2  | 1pm-1:30pm |                                             I worked on my query function during this time. At first, I was doing it wrong because I wasn't hashing the key when I was searching, so it was invalid every time. Once I fixed that, it worked for half of the test cases, but not the other half, so I looked into the test cases and figured out that I needed to return the final variable INVALID instead of the word invalid in order to get it to match. I did that and now it passes all checks! |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
