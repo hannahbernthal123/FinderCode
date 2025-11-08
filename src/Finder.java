@@ -18,7 +18,7 @@ public class Finder {
     public Finder() {
         map = new hMap();
     }
-
+//
 
     public void buildTable(BufferedReader br, int keyCol, int valCol) throws IOException {
         // HashTable implementation
