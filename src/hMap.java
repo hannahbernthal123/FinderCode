@@ -1,26 +1,25 @@
 public class hMap {
+    // Want a number that is large and prime.
     final int DEFAULT_TABLE_SIZE = 997;
-    final int RADIX = 256;
+    static final int RADIX = 256;
     final String INVALID = "INVALID KEY";
     int tableSize;
     int numEntries;
-    int loadFactor;
     String[] keys;
     String[] values;
-
-
 
     public hMap() {
         tableSize = DEFAULT_TABLE_SIZE;
         numEntries = 0;
+
+        // Associative arrays of keys and values.
         keys = new String[tableSize];
         values = new String[tableSize];
-        loadFactor = numEntries / tableSize;
     }
 
     public void add(String key, String value) {
-        // Check load factor.
-        if (loadFactor >= .5) {
+        // Check load factor. If more than half of table is filled, resize.
+        if (numEntries / tableSize >= .5) {
             resize();
         }
 
@@ -33,12 +32,14 @@ public class hMap {
 
         keys[index] = key;
         values[index] = value;
+        // Index numEntries because something was added to the table.
+        numEntries++;
     }
 
     public String get(String key) {
         int index = hash(key);
 
-        // Loop through to find where you actually put this key (could have been a collision).
+        // Loop through to find where you actually put this key (could have been a collision that moved it).
         while (keys[index] != null) {
             if (keys[index].equals(key)) {
                 return values[index];
@@ -53,20 +54,25 @@ public class hMap {
     }
 
     public int hash(String key) {
-        int hash = -1;
-
+        // Hash using Horner's method.
+        int hash = 0;
         for (int i = 0; i < key.length(); i++) {
-
+            // Mod by the tableSize to make sure values stay in size range as table gets bigger.
+            hash = (RADIX * hash + key.charAt(i)) % tableSize;
         }
 
+        return hash;
     }
 
     public void resize() {
+        // Double tableSize so that you can resize array.
         tableSize *= 2;
 
-        // Create new arrays that are doubled in size.
+        // Store old arrays to assist in transfering data.
         String[] keysOld = keys;
         String[] valsOld = values;
+
+        // Create new arrays that are doubled in size.
         keys = new String[tableSize * 2];
         values = new String[tableSize * 2];
 
