@@ -2,12 +2,14 @@ public class hMap {
     // Want a number that is large and prime.
     final int DEFAULT_TABLE_SIZE = 997;
     static final int RADIX = 256;
+    // Value returned when lookup key is not found.
     final String INVALID = "INVALID KEY";
     int tableSize;
     int numEntries;
     String[] keys;
     String[] values;
 
+    // Constructs empty hash map with default capacity.
     public hMap() {
         tableSize = DEFAULT_TABLE_SIZE;
         numEntries = 0;
@@ -17,6 +19,7 @@ public class hMap {
         values = new String[tableSize];
     }
 
+    // Inserts new key value pair into table.
     public void add(String key, String value) {
         // Check load factor. If more than half of table is filled, resize.
         if (numEntries / tableSize >= .5) {
@@ -25,7 +28,7 @@ public class hMap {
 
         int index = hash(key);
 
-        // Check next index until empty spot is found.
+        // Check next index until empty spot is found (linear probing).
         while (keys[index] != null) {
             index = (index + 1) % tableSize;
         }
